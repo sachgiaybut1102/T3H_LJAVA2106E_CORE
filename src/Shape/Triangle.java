@@ -49,4 +49,9 @@ public class Triangle implements Shape {
 
         return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter * c));
     }
+
+    @Override
+    public String getName() {
+        return "Triangle";
+    }
 }

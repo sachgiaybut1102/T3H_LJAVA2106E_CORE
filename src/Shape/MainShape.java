@@ -2,48 +2,110 @@ package Shape;
 
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MainShape {
-    public static void main(String[] agrs){
-        ArrayList<Shape> shapes = new ArrayList<Shape>();
+    public static void main(String[] agrs) {
+        Scanner scanner = new Scanner(System.in);
+        Shape[] shapes;
 
-        Circle circle = new Circle(10);
-        Rectangle rectangle = new Rectangle(20,30);
-        Square square = new Square(20);
-        Triangle triangle = new Triangle(20,30,40);
+        int n;
 
-        shapes.add(circle);
-        shapes.add(rectangle);
-        shapes.add(square);
-        shapes.add(triangle);
+        Shape maxP;// Chu vi lớn nhất
+        Shape maxS;// Diện tích lớn nhất
 
-        double maxP = -1;// Chu vi lớn nhất
-        double maxS = -1;// Diện tích lớn nhất
+        boolean flag;
 
-        for (Shape shape: shapes) {
-            double area = shape.Area();
-            double perimeter = shape.Perimeter();
+        do {
+            flag = true;
 
-            if(area > maxS){
-                maxS = area;
+            System.out.print("Enter value of n (0 < n <= 50): ");
+            n = scanner.nextInt();
+
+            if (!(0 < n && n <= 50)) {
+                System.out.println("The value you just entered is invalid, please try again!");
+                flag = false;
+            }
+        } while (!flag);
+
+        shapes = new Shape[n];
+
+        for (int i = 0; i < shapes.length; i++) {
+            int selection;
+
+            System.out.println("List shapes:");
+            System.out.println("1. Circle");
+            System.out.println("2. Rectangle");
+            System.out.println("3. Square");
+            System.out.println("4. Triangle");
+            System.out.print("Choose shape:");
+
+            selection = scanner.nextInt();
+
+            switch (selection) {
+                case 1:
+                    Circle circle = new Circle();
+                    System.out.print("Enter the radius of circle: ");
+                    circle.setR(scanner.nextFloat());
+
+                    shapes[i] = circle;
+                    break;
+                case 2:
+                    Rectangle rectangle = new Rectangle();
+
+                    System.out.print("Enter the with of rectangle: ");
+                    rectangle.setWidth(scanner.nextFloat());
+
+                    System.out.print("Enter the height of rectangle: ");
+                    rectangle.setHeight(scanner.nextFloat());
+
+                    shapes[i] = rectangle;
+                    break;
+                case 3:
+                    Square square = new Square();
+
+                    System.out.print("Enter the with of rectangle: ");
+                    square.setWidth(scanner.nextFloat());
+
+                    shapes[i] = square;
+                    break;
+
+                case 4:
+                    Triangle triangle = new Triangle();
+
+                    System.out.print("Enter the size A of triangle: ");
+                    triangle.setA(scanner.nextFloat());
+
+                    System.out.print("Enter the size B of triangle: ");
+                    triangle.setB(scanner.nextFloat());
+
+                    System.out.print("Enter the size C of triangle: ");
+                    triangle.setC(scanner.nextFloat());
+
+                    shapes[i] = triangle;
+                    break;
+                default:
+                    break;
             }
 
-            if (perimeter > maxP){
-                maxP = perimeter;
+        }
+
+        maxP = shapes[0];
+        maxS = shapes[0];
+
+        for (Shape shape : shapes) {
+            if (shape.Area() > maxS.Area()) {
+                maxS = shape;
+            }
+
+            if (shape.Perimeter() > maxP.Perimeter()) {
+                maxP = shape;
             }
         }
 
-        if (maxP != -1){
-            System.out.println("Chu vi lon nhat = " + maxP);
-        } else{
-            System.out.println("Khong tim thay chu vi lon nhat!");
-        }
+        System.out.println("The shape max Area have value = " + maxS.Area() + " and it's a " + maxS.getName());
+        System.out.println("The shape max Perimeter have value = " + maxP.Area() + " and it's a " + maxP.getName());
 
-        if(maxS != -1){
-            System.out.println("Dien tich lon nhat = " + maxS);
-        }else {
-            System.out.println("Khong tim thay dien tich lon nhat!");
-        }
 
         //BTVN:
         // 1.Bổ xung thêm phần nhập só lượng Shape và lựa chọn đó là hình gì (n <= 50)

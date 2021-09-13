@@ -28,4 +28,9 @@ public class Circle implements Shape {
     public double Area() {
         return 2 * Math.PI * r;
     }
+
+    @Override
+    public String getName() {
+        return "Circle";
+    }
 }

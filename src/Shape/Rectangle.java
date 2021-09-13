@@ -1,6 +1,6 @@
 package Shape;
 
-public class Rectangle implements Shape{
+public class Rectangle implements Shape {
     private double width;
     private double height;
 
@@ -30,11 +30,16 @@ public class Rectangle implements Shape{
 
     @Override
     public double Perimeter() {
-        return 0;
+        return 2 * (width + height);
     }
 
     @Override
     public double Area() {
-        return 0;
+        return width * height;
+    }
+
+    @Override
+    public String getName() {
+        return "Rectangle";
     }
 }
