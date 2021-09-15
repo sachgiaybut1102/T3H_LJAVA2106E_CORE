@@ -103,13 +103,27 @@ public class MainShape {
             }
         }
 
-        System.out.println("The shape max Area have value = " + maxS.Area() + " and it's a " + maxS.getName());
-        System.out.println("The shape max Perimeter have value = " + maxP.Area() + " and it's a " + maxP.getName());
+        System.out.println("The shape max Area have value = " + maxS.Area() + " and it's a " + getName(maxS));
+        System.out.println("The shape max Perimeter have value = " + maxP.Area() + " and it's a " + getName(maxP));
 
 
         //BTVN:
         // 1.Bổ xung thêm phần nhập só lượng Shape và lựa chọn đó là hình gì (n <= 50)
         // 2.Kiểm tra hình có diện tích lớn nhất là hình gì?
         // 3.Kiểm tra hình có chu vi lớn nhất là hình gì?
+    }
+
+    static String getName(Shape shape) {
+        if (shape instanceof Circle) {
+            return "Circle";
+        } else if (shape instanceof Rectangle) {
+            return "Rectangle";
+        } else if (shape instanceof Square) {
+            return "Square";
+        } else if (shape instanceof Triangle) {
+            return "Triangle";
+        } else {
+            return "Unknown";
+        }
     }
 }
