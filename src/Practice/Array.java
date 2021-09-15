@@ -25,7 +25,7 @@ public class Array {
         reverseDisplay();
     }
 
-    public void ex2(){
+    public void ex2() {
         initArray();
         setValueToArray();
         display();
@@ -38,9 +38,23 @@ public class Array {
         System.out.println("tong cac so le trong mang la: " + totalOddNumber);
         System.out.println("Cau b:");
         System.out.println("Hieu giua tong cac so chan va tong cac so le la: " + (totalEvenNumber - totalOddNumber));
+        System.out.println("Cau c:");
+        System.out.print("Cac so xuat hien mot lan duy nhat trong mang la: ");
+        findNumberExistUniqueInArray();
+        System.out.println("Cau d:");
+        System.out.print("So co so hien thi nhieu nhat tron mang la: ");
+        findMaxNumberExistInArray();
+        System.out.println("Cau e:");
+        System.out.print("So lon nhat trong mang la: ");
+        findMaxNumberInArray();
+        System.out.print("So nho nhat trong mang la: ");
+        findMinNumberInArray();
+        System.out.println("Cau f");
+        System.out.print("Cac so nguyen to trong mang la: ");
+        findPrimes();
     }
 
-    private void initArray(){
+    private void initArray() {
         int n;
         boolean flag;
         do {
@@ -59,14 +73,14 @@ public class Array {
         numbers = new int[n];
     }
 
-    private void setValueToArray(){
+    private void setValueToArray() {
         for (int i = 0; i < numbers.length; i++) {
             System.out.print("A[" + i + "] = ");
             numbers[i] = sc.nextInt();
         }
     }
 
-    private void display(){
+    private void display() {
         System.out.print("Day so vua moi nhap la: ");
         for (int i = 0; i < numbers.length; i++) {
             System.out.print(numbers[i]);
@@ -80,7 +94,7 @@ public class Array {
         System.out.println();
     }
 
-    private void reverseDisplay(){
+    private void reverseDisplay() {
         System.out.print("Day so theo thu tu nguoc la: ");
         for (int i = numbers.length - 1; i >= 0; i--) {
             System.out.print(numbers[i]);
@@ -93,11 +107,11 @@ public class Array {
         }
     }
 
-    private int totalEvenNumber(){
+    private int totalEvenNumber() {
         int total = 0;
         for (int num :
-             numbers) {
-            if (num % 2 == 0){
+                numbers) {
+            if (num % 2 == 0) {
                 total += num;
             }
         }
@@ -105,15 +119,137 @@ public class Array {
         return total;
     }
 
-    private int totalOddNumber(){
+    private int totalOddNumber() {
         int total = 0;
         for (int num :
                 numbers) {
-            if (num % 2 != 0){
+            if (num % 2 != 0) {
                 total += num;
             }
         }
 
         return total;
+    }
+
+    private void findNumberExistUniqueInArray() {
+        boolean flag = false;
+
+        for (int num : numbers) {
+            int count = 0;
+
+            for (int num2 : numbers) {
+                if (num2 == num) {
+                    count++;
+                }
+            }
+
+            if (count == 1) {
+                if (flag) {
+                    System.out.print(", ");
+                }
+
+                System.out.print(num);
+
+                flag = true;
+            }
+        }
+
+        if (!flag) {
+            System.out.println("Khong so nao thoa man dieu kien!");
+        }
+
+        System.out.println();
+    }
+
+    private void findMaxNumberExistInArray() {
+        int maxCount = 0;
+        int maxNum = 0;
+
+        for (int num :
+                numbers) {
+            int count = 0;
+
+            for (int num2 : numbers) {
+                if (num2 == num) {
+                    count++;
+                }
+            }
+
+            if (count > maxCount) {
+                maxCount = count;
+                maxNum = num;
+            }
+        }
+
+        if (maxCount > 0) {
+            System.out.print(maxNum + " voi " + maxCount + " lan xuat hien!");
+        } else {
+            System.out.print("Khong tim duoc so nao ca!");
+        }
+        System.out.println();
+    }
+
+    private void findMaxNumberInArray() {
+        int maxNum = numbers[0];
+        int indexOfNum = -1;
+
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > maxNum) {
+                maxNum = numbers[i];
+                indexOfNum = i;
+            }
+        }
+
+        System.out.println(maxNum + " xuat hien tai vi tri i = " + indexOfNum);
+    }
+
+    private void findMinNumberInArray() {
+        int minNum = numbers[0];
+        int indexOfNum = -1;
+
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] < minNum) {
+                minNum = numbers[i];
+                indexOfNum = i;
+            }
+        }
+
+        System.out.println(minNum + " xuat hien tai vi tri i = " + indexOfNum);
+    }
+
+    private void findPrimes() {
+        boolean flag = false;
+
+        for (int num:
+             numbers) {
+            if (isPrimes(num)){
+                if (flag){
+                    System.out.print(", ");
+                }
+
+                System.out.print(num);
+                flag = true;
+            }
+        }
+
+        if (!flag){
+            System.out.print("Khong co so nao la so nguyen to!");
+        }
+
+        System.out.println();
+    }
+
+    private boolean isPrimes(int num) {
+        if (num < 2) {
+            return false;
+        }
+
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
