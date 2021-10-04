@@ -45,27 +45,20 @@ public class MainShape {
             switch (selection) {
                 case 1:
                     Circle circle = new Circle();
-                    System.out.print("Enter the radius of circle: ");
-                    circle.setR(scanner.nextFloat());
+                    circle.setR(getInput("Enter the radius of circle: "));
 
                     shapes[i] = circle;
                     break;
                 case 2:
                     Rectangle rectangle = new Rectangle();
-
-                    System.out.print("Enter the with of rectangle: ");
-                    rectangle.setWidth(scanner.nextFloat());
-
-                    System.out.print("Enter the height of rectangle: ");
-                    rectangle.setHeight(scanner.nextFloat());
+                    rectangle.setWidth(getInput("Enter the with of rectangle: "));
+                    rectangle.setHeight(getInput("Enter the height of rectangle: "));
 
                     shapes[i] = rectangle;
                     break;
                 case 3:
                     Square square = new Square();
-
-                    System.out.print("Enter the with of rectangle: ");
-                    square.setWidth(scanner.nextFloat());
+                    square.setWidth(getInput("Enter the with of rectangle: "));
 
                     shapes[i] = square;
                     break;
@@ -73,14 +66,9 @@ public class MainShape {
                 case 4:
                     Triangle triangle = new Triangle();
 
-                    System.out.print("Enter the size A of triangle: ");
-                    triangle.setA(scanner.nextFloat());
-
-                    System.out.print("Enter the size B of triangle: ");
-                    triangle.setB(scanner.nextFloat());
-
-                    System.out.print("Enter the size C of triangle: ");
-                    triangle.setC(scanner.nextFloat());
+                    triangle.setA(getInput("Enter the size A of triangle: "));
+                    triangle.setB(getInput("Enter the size B of triangle: "));
+                    triangle.setC(getInput("Enter the size C of triangle: "));
 
                     shapes[i] = triangle;
                     break;
@@ -125,5 +113,32 @@ public class MainShape {
         } else {
             return "Unknown";
         }
+    }
+
+    static float getInput(String content) {
+        Scanner sc = new Scanner(System.in);
+        float num = 0;
+        boolean flag;
+
+        do {
+            try {
+                flag = true;
+
+                System.out.print(content);
+
+                num = sc.nextFloat();
+
+                if (num < 0 ){
+                    System.out.println("Input value must be greater than 0, please re-enter!");
+                    flag = false;
+                }
+            } catch (Exception ex) {
+                flag = false;
+                sc.nextLine();
+                System.out.println("Input value is not number, please re-enter!");
+            }
+        }while (!flag);
+
+        return num;
     }
 }
