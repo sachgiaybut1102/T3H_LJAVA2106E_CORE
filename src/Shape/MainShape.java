@@ -2,35 +2,22 @@ package Shape;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MainShape {
     public static void main(String[] agrs) {
         Scanner scanner = new Scanner(System.in);
-        Shape[] shapes;
+        List<Shape> shapes = new ArrayList<Shape>();
 
         int n;
 
         Shape maxP;// Chu vi lớn nhất
         Shape maxS;// Diện tích lớn nhất
 
-        boolean flag;
+        boolean flag = true;
 
-        do {
-            flag = true;
-
-            System.out.print("Enter value of n (0 < n <= 50): ");
-            n = scanner.nextInt();
-
-            if (!(0 < n && n <= 50)) {
-                System.out.println("The value you just entered is invalid, please try again!");
-                flag = false;
-            }
-        } while (!flag);
-
-        shapes = new Shape[n];
-
-        for (int i = 0; i < shapes.length; i++) {
+        while (flag) {
             int selection;
 
             System.out.println("List shapes:");
@@ -38,6 +25,7 @@ public class MainShape {
             System.out.println("2. Rectangle");
             System.out.println("3. Square");
             System.out.println("4. Triangle");
+            System.out.println("5. Exit");
             System.out.print("Choose shape:");
 
             selection = scanner.nextInt();
@@ -47,20 +35,20 @@ public class MainShape {
                     Circle circle = new Circle();
                     circle.setR(getInput("Enter the radius of circle: "));
 
-                    shapes[i] = circle;
+                    shapes.add(circle);
                     break;
                 case 2:
                     Rectangle rectangle = new Rectangle();
                     rectangle.setWidth(getInput("Enter the with of rectangle: "));
                     rectangle.setHeight(getInput("Enter the height of rectangle: "));
 
-                    shapes[i] = rectangle;
+                    shapes.add(rectangle);
                     break;
                 case 3:
                     Square square = new Square();
                     square.setWidth(getInput("Enter the with of rectangle: "));
 
-                    shapes[i] = square;
+                    shapes.add(square);
                     break;
 
                 case 4:
@@ -70,16 +58,18 @@ public class MainShape {
                     triangle.setB(getInput("Enter the size B of triangle: "));
                     triangle.setC(getInput("Enter the size C of triangle: "));
 
-                    shapes[i] = triangle;
+                    shapes.add(triangle);
                     break;
+                case 5:
+                    flag = false;
                 default:
                     break;
             }
 
         }
 
-        maxP = shapes[0];
-        maxS = shapes[0];
+        maxP = shapes.get(0);
+        maxS = shapes.get(0);
 
         for (Shape shape : shapes) {
             if (shape.Area() > maxS.Area()) {
